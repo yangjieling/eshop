@@ -1,0 +1,25 @@
+spring:
+  redis:
+    database: 5
+    cluster:
+      nodes: 192.168.56.102:7001,192.168.56.102:7002,192.168.56.103:7003,192.168.56.103:7004,192.168.56.104:7005,192.168.56.104:7006
+      max-redirects: 3
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.56.101:3306/eshop?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+mybatis:
+  mapper-locations: classpath:/mybatis/mapper/*.xml
+  type-aliases-package: com.xinxin.eshop.inventory.model
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    com.xinxin.eshop.inventory: debug
