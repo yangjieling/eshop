@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: eshop-excel
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.56.101:3306/eshop?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
+server:
+  port: 8081
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/**
+  type-aliases-package: com.xinxin.eshop.excel.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
