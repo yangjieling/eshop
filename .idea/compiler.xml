@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="eshop-inventory" />
+        <module name="eshop-excel" />
+        <module name="eshop-cache" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="eshop-cache" target="1.8" />
+      <module name="eshop-excel" target="1.8" />
+      <module name="eshop-inventory" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="eshop-cache" options="-parameters" />
+      <module name="eshop-excel" options="-parameters" />
+      <module name="eshop-inventory" options="-parameters" />
+    </option>
+  </component>
+</project>

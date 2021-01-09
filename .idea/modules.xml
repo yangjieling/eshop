@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/eshop-cache/eshop-cache.iml" filepath="$PROJECT_DIR$/eshop-cache/eshop-cache.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eshop-excel/eshop-excel.iml" filepath="$PROJECT_DIR$/eshop-excel/eshop-excel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eshop-inventory/eshop-inventory.iml" filepath="$PROJECT_DIR$/eshop-inventory/eshop-inventory.iml" />
+    </modules>
+  </component>
+</project>
