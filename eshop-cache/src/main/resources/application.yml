@@ -1,0 +1,23 @@
+server:
+  port: 8081
+#spring:
+#  kafka:
+#    bootstrap-servers: http://192.168.56.102:9092,http://192.168.56.103:9092,http://192.168.56.104:9092
+#    producer:
+#      retries: 3
+#      acks: all
+#      batch-size: 16384
+#      buffer-memory: 33554432
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+#
+#    consumer:
+#      group-id: eshop-cache-group
+#      auto-offset-reset: earliest
+#      enable-auto-commit: false
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      max-poll-records: 20000
+#    listener:
+#      concurrency: 3
+#      ack-mode: MANUAL
