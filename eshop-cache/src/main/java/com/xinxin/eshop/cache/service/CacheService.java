@@ -20,4 +20,8 @@ public interface CacheService {
     void saveProductInfo2RedisCache(ProductInfo productInfo);
 
     void saveShopInfo2RedisCache(ShopInfo shopInfo);
+
+    ProductInfo getProductInfoFromRedisCache(Long productId);
+
+    ShopInfo getShopInfoFromRedisCache(Long shopId);
 }

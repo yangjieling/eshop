@@ -11,6 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * kafka消费者线程
@@ -19,10 +22,12 @@ import java.util.Properties;
 public class KafkaConsumer implements Runnable {
     private static final Logger log = LoggerFactory.getLogger(KafkaConsumer.class);
 
+    private ThreadPoolExecutor taskExecutor;
     private ConsumerConnector consumerConnector;
     private String topic;
 
     public KafkaConsumer(String topic){
+        this.taskExecutor = new ThreadPoolExecutor(5, 10, 200, TimeUnit.MILLISECONDS,new ArrayBlockingQueue<>(10000));
         this.consumerConnector = Consumer.createJavaConsumerConnector(createConsumerConfig());
         this.topic = topic;
         log.info("kafkaConsumer 初始化完成，监听的topic：{}",topic);
@@ -36,7 +41,8 @@ public class KafkaConsumer implements Runnable {
         Map<String, List<KafkaStream<byte[],byte[]>>> consumerMap = consumerConnector.createMessageStreams(topicCountMap);
         List<KafkaStream<byte[], byte[]>> kafkaStreams = consumerMap.get(topic);
         for (KafkaStream stream : kafkaStreams){
-            new Thread(new KafkaMessageProcessor(stream)).start();
+            taskExecutor.submit(new KafkaMessageProcessor(stream));
+//            new Thread(new KafkaMessageProcessor(stream)).start();
         }
 
     }

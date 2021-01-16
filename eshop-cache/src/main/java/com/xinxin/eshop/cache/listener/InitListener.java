@@ -1,7 +1,9 @@
 package com.xinxin.eshop.cache.listener;
 
 import com.xinxin.eshop.cache.kafka.KafkaConsumer;
+import com.xinxin.eshop.cache.rebuild.RebuildCacheThread;
 import com.xinxin.eshop.cache.spring.SpringContext;
+import com.xinxin.eshop.cache.zk.ZookeeperSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.WebApplicationContext;
@@ -28,7 +30,11 @@ public class InitListener implements ServletContextListener {
 
         // 初始化KafkaConsumer线程
         new Thread(new KafkaConsumer("cache-message")).start();
+        // 启动缓存重建处理线程
+        new Thread(new RebuildCacheThread()).start();
         log.info("自定义初始化监听器创建成功！");
+        ZookeeperSession.init();
+        log.info("初始化zookeeperSession成功");
     }
 
     @Override
