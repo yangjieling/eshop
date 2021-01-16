@@ -6,6 +6,7 @@
         <option value="$PROJECT_DIR$/eshop-excel/pom.xml" />
         <option value="$PROJECT_DIR$/eshop-inventory/pom.xml" />
         <option value="$PROJECT_DIR$/eshop-cache/pom.xml" />
+        <option value="$PROJECT_DIR$/eshop-wordcount/pom.xml" />
       </list>
     </option>
   </component>
