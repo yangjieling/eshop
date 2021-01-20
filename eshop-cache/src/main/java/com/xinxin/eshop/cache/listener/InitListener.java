@@ -32,9 +32,10 @@ public class InitListener implements ServletContextListener {
         new Thread(new KafkaConsumer("cache-message")).start();
         // 启动缓存重建处理线程
         new Thread(new RebuildCacheThread()).start();
-        log.info("自定义初始化监听器创建成功！");
+        // 初始化zookeeperSession对象
         ZookeeperSession.init();
-        log.info("初始化zookeeperSession成功");
+
+//        new CachePrewarmThread().start();
     }
 
     @Override

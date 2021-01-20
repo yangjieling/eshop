@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="eshop-inventory" />
         <module name="eshop-excel" />
+        <module name="eshop-storm" />
         <module name="eshop-cache" />
         <module name="eshop-wordcount" />
       </profile>
@@ -17,6 +18,7 @@
       <module name="eshop-cache" target="1.8" />
       <module name="eshop-excel" target="1.8" />
       <module name="eshop-inventory" target="1.8" />
+      <module name="eshop-storm" target="8" />
       <module name="eshop-wordcount" target="1.5" />
     </bytecodeTargetLevel>
   </component>

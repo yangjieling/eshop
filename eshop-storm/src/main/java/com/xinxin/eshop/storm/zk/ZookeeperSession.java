@@ -1,4 +1,4 @@
-package com.xinxin.eshop.cache.zk;
+package com.xinxin.eshop.storm.zk;
 
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
@@ -11,10 +11,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * 创建zookeeper集群session
- * 单例模式
- */
 public class ZookeeperSession {
     private static final Logger log = LoggerFactory.getLogger(ZookeeperSession.class);
 
@@ -41,6 +37,19 @@ public class ZookeeperSession {
         }
     }
 
+    public void createNode(String path) {
+        try {
+            if (null == zooKeeper.exists(path, false)) {
+                System.out.println("======================createNode================" + path);
+                zooKeeper.create(path, "".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+            }
+        } catch (KeeperException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * 自定义zookeeper创建session监听器watcher
      */
@@ -56,15 +65,10 @@ public class ZookeeperSession {
     }
 
     /**
-     * 获取分布式锁
-     * 通过zookeeper获取分布式锁
-     * 创建临时节点成功 线程放行
-     * 创建临时节点失败 线程阻塞 继续循环尝试创建节点
-     *
-     * @param productId
+     * zookeeper写入taskId list时候获取分布式锁
      */
-    public void acquireDistributeLock(Long productId) {
-        String path = "/product-lock-" + productId;
+    public void acquireDistributeLock() {
+        String path = "/taskId-list-lock";
         log.info("one acquire distribute lock from zookeeper start ......");
         try {
             zooKeeper.create(path, Thread.currentThread().getName().getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
@@ -76,25 +80,22 @@ public class ZookeeperSession {
                     TimeUnit.MILLISECONDS.sleep(1000);
                     zooKeeper.create(path, Thread.currentThread().getName().getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
                 } catch (Exception ex) {
-                    log.info("try cycle lock from zookeeper happen exception [:{}]", ex.getClass());
+                    log.info("try cycle lock from zookeeper happen exception [:{}]",ex.getClass());
                     count.incrementAndGet();
                     continue;
                 }
-                log.info("success to acquire lock for product [id={}] after {} times try ......", productId, count);
+                log.info("success to acquire lock for [{}] after {} times try ......",path,count);
                 break;
             }
         }
     }
 
     /**
-     * 释放一个分布式锁
-     * 主动删除zookeeper中的临时节点
-     *
-     * @param productId
+     * 释放添加taskId list时获取的锁
      */
-    public void releaseDistributeLock(Long productId) {
-        log.info("start for release distribute lock from product [id={}]", productId);
-        String path = "/product-lock-" + productId;
+    public void releaseDistributeLock(){
+        String path = "/taskId-list-lock";
+        log.info("start for release distribute lock from [{}]",path);
         try {
             zooKeeper.delete(path, -1);
         } catch (InterruptedException e) {
@@ -106,73 +107,11 @@ public class ZookeeperSession {
     }
 
     /**
-     * 获取一个快速失败的锁
-     * 一次获取失败
-     * 将不在重新获取
-     *
+     * 给zookeeper添加节点
      * @param path
-     * @return
+     * @param data
      */
-    public boolean acquireFastFailedDistributedLock(String path) {
-        log.info("start for acquire FastFailed distribute lock from path [{}]", path);
-        try {
-            zooKeeper.create(path, "".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
-            return true;
-        } catch (Exception e) {
-            log.info("acquire FastFailed distribute lock from path [{}] is failed", path);
-        }
-        return false;
-    }
-
-    /**
-     * 根据指定节点释放锁
-     *
-     * @param path
-     */
-    public void releaseDistributeLock(String path) {
-        log.info("start for release distribute lock from path [{}]", path);
-        try {
-            zooKeeper.delete(path, -1);
-        } catch (Exception e) {
-            log.info("release distribute lock failed from zookeeper,exception [{}]",e);
-        }
-        log.info("release distribute lock success from zookeeper");
-    }
-
-    public void acquireDistributeLock(String path) {
-        try {
-            zooKeeper.create(path, Thread.currentThread().getName().getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
-        } catch (Exception e) {
-            log.info("one acquire distribute lock from zookeeper failure,so for try cycle create lock start ...........");
-            AtomicInteger count = new AtomicInteger(0);// try cycle number
-            while (true) {
-                try {
-                    TimeUnit.MILLISECONDS.sleep(1000);
-                    zooKeeper.create(path, Thread.currentThread().getName().getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
-                } catch (Exception ex) {
-                    log.info("try cycle lock from zookeeper happen exception [:{}]", ex.getClass());
-                    count.incrementAndGet();
-                    continue;
-                }
-                log.info("success to acquire lock for product [{}] after {} times try ......", path, count);
-                break;
-            }
-        }
-    }
-
-    public void createNode(String path) {
-        try {
-            if (null == zooKeeper.exists(path, false)) {
-                zooKeeper.create(path, "".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
-            }
-        } catch (KeeperException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setNodeData(String path, String data) {
+    public void setNodeData(String path,String data){
         try {
             zooKeeper.setData(path, data.getBytes(), -1);
         } catch (KeeperException e) {
@@ -182,12 +121,14 @@ public class ZookeeperSession {
         }
     }
 
-    public String getNodeData(String path) {
+    /**
+     * 获zookeeper取节点数据
+     * @param path
+     * @return
+     */
+    public String getNodeData(String path){
         try {
-            if (null == zooKeeper.exists(path, false)) {
-                zooKeeper.create(path, "".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
-            }
-            return new String(zooKeeper.getData(path, null, new Stat()), "UTF-8");
+            return new String(zooKeeper.getData(path, null, new Stat()),"UTF-8");
         } catch (KeeperException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -218,3 +159,4 @@ public class ZookeeperSession {
         getInstance();
     }
 }
+

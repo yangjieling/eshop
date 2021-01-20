@@ -3,6 +3,7 @@ package com.xinxin.eshop.cache.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.xinxin.eshop.cache.model.ProductInfo;
 import com.xinxin.eshop.cache.model.ShopInfo;
+import com.xinxin.eshop.cache.prewarm.CachePrewarmThread;
 import com.xinxin.eshop.cache.rebuild.RebuildCacheQueue;
 import com.xinxin.eshop.cache.service.CacheService;
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -87,5 +89,11 @@ public class CacheController {
         }
         log.info("getProductInfo请求处理成功，响应结果：{}", JSONObject.toJSONString(shopInfo));
         return shopInfo;
+    }
+
+    @RequestMapping("/prewarmCache")
+    @ResponseBody
+    public void prewarmCache(){
+        new CachePrewarmThread().start();
     }
 }

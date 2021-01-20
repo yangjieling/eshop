@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/eshop-cache/eshop-cache.iml" filepath="$PROJECT_DIR$/eshop-cache/eshop-cache.iml" />
       <module fileurl="file://$PROJECT_DIR$/eshop-excel/eshop-excel.iml" filepath="$PROJECT_DIR$/eshop-excel/eshop-excel.iml" />
       <module fileurl="file://$PROJECT_DIR$/eshop-inventory/eshop-inventory.iml" filepath="$PROJECT_DIR$/eshop-inventory/eshop-inventory.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eshop-storm/eshop-storm.iml" filepath="$PROJECT_DIR$/eshop-storm/eshop-storm.iml" />
       <module fileurl="file://$PROJECT_DIR$/eshop-wordcount/eshop-wordcount.iml" filepath="$PROJECT_DIR$/eshop-wordcount/eshop-wordcount.iml" />
     </modules>
   </component>

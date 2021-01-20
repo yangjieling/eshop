@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.xinxin.eshop</groupId>
-    <artifactId>eshop-wordcount</artifactId>
+    <artifactId>eshop-storm</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -13,6 +13,36 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.11</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka_2.9.2</artifactId>
+            <version>0.8.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>3.4.5</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.75</version>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -23,7 +53,8 @@
             <groupId>org.apache.storm</groupId>
             <artifactId>storm-core</artifactId>
             <version>2.2.0</version>
-<!--            <scope>provided</scope>-->
+<!--            开发的时候注释掉，打包的时候取消注释-->
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -94,7 +125,15 @@
                     <includeProjectDependencies>true</includeProjectDependencies>
                     <includePluginDependencies>false</includePluginDependencies>
                     <classpathScope>compile</classpathScope>
-                    <mainClass>com.xinxin.eshop.storm.WordCountTopology</mainClass>
+                    <mainClass>com.xinxin.eshop.storm.HotProductTopology</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
         </plugins>
