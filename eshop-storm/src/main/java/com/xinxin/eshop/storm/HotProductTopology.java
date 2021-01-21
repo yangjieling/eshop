@@ -39,7 +39,7 @@ public class HotProductTopology {
             try {
                 LocalCluster localCluster = new LocalCluster();
                 localCluster.submitTopology("HotProductTopology", config, builder.createTopology());
-                Utils.sleep(300000);
+                Utils.sleep(1000 * 60 * 10);
                 localCluster.shutdown();
             } catch (Exception e) {
                 e.printStackTrace();
