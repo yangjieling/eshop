@@ -7,17 +7,21 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="eshop-inventory" />
-        <module name="eshop-excel" />
-        <module name="eshop-storm" />
         <module name="eshop-cache" />
+        <module name="eshop-excel" />
         <module name="eshop-wordcount" />
+        <module name="eshop-inventory" />
+        <module name="eshop-cache-ha" />
+        <module name="eshop-storm" />
+        <module name="eshop-product-ha" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="eshop-cache" target="1.8" />
+      <module name="eshop-cache-ha" target="1.8" />
       <module name="eshop-excel" target="1.8" />
       <module name="eshop-inventory" target="1.8" />
+      <module name="eshop-product-ha" target="1.8" />
       <module name="eshop-storm" target="8" />
       <module name="eshop-wordcount" target="1.5" />
     </bytecodeTargetLevel>
@@ -25,8 +29,10 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="eshop-cache" options="-parameters" />
+      <module name="eshop-cache-ha" options="-parameters" />
       <module name="eshop-excel" options="-parameters" />
       <module name="eshop-inventory" options="-parameters" />
+      <module name="eshop-product-ha" options="-parameters" />
     </option>
   </component>
 </project>

@@ -8,6 +8,8 @@
         <option value="$PROJECT_DIR$/eshop-cache/pom.xml" />
         <option value="$PROJECT_DIR$/eshop-wordcount/pom.xml" />
         <option value="$PROJECT_DIR$/eshop-storm/pom.xml" />
+        <option value="$PROJECT_DIR$/eshop-cache-ha/pom.xml" />
+        <option value="$PROJECT_DIR$/eshop-product-ha/pom.xml" />
       </list>
     </option>
   </component>
