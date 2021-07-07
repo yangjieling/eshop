@@ -4,7 +4,11 @@ import com.xinxin.eshop.inventory.model.ProductInventory;
 import com.xinxin.eshop.inventory.service.ProductInventoryService;
 
 /**
- * 更新数据库商品库存数量请求封装对象
+ * @ClassName ProductInventoryDBUpdateRequest
+ * @Description 更新数据库商品库存数量请求封装对象
+ * @Author lantianbaiyun
+ * @Date 2021-07-07
+ * @Version 1.0
  */
 public class ProductInventoryDBUpdateRequest implements Request {
 
@@ -28,7 +32,7 @@ public class ProductInventoryDBUpdateRequest implements Request {
 
     @Override
     public Integer getProductId() {
-        return productInventory.getProductInventoryCnt();
+        return productInventory.getProductId();
     }
 
     @Override

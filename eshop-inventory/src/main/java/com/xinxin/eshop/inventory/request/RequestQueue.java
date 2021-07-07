@@ -7,8 +7,12 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 保存内存队列
+ * @ClassName RequestQueue
+ * @Description 保存内存队列
  * 单例模式
+ * @Author lantianbaiyun
+ * @Date 2021-07-07
+ * @Version 1.0
  */
 public class RequestQueue {
 
@@ -24,7 +28,7 @@ public class RequestQueue {
      * false：读请求
      * null：从未进入队列
      */
-    private Map<Integer,Boolean> flagMap = new ConcurrentHashMap<Integer,Boolean>();
+    private Map<Integer, Boolean> flagMap = new ConcurrentHashMap<Integer, Boolean>();
 
     private static class Singleton {
         private static RequestQueue instance;
@@ -49,6 +53,7 @@ public class RequestQueue {
 
     /**
      * 添加内存队列
+     *
      * @param queue
      */
     public void addQueue(ArrayBlockingQueue<Request> queue) {
@@ -57,26 +62,29 @@ public class RequestQueue {
 
     /**
      * 获取队列集合中队列的个数
+     *
      * @return
      */
-    public int queueSize(){
+    public int queueSize() {
         return queues.size();
     }
 
     /**
      * 通过下表获取集合中的内存队列
+     *
      * @param index
      * @return
      */
-    public ArrayBlockingQueue<Request> getQueue(int index){
+    public ArrayBlockingQueue<Request> getQueue(int index) {
         return queues.get(index);
     }
 
     /**
      * 获取标识位
+     *
      * @return
      */
-    public Map<Integer,Boolean> getFlagMap(){
+    public Map<Integer, Boolean> getFlagMap() {
         return flagMap;
     }
 }

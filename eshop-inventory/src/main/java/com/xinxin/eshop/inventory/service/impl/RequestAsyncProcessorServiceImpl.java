@@ -10,8 +10,12 @@ import org.springframework.stereotype.Service;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
- * 请求异步处理的service
+ * @ClassName RequestAsyncProcessorServiceImpl
+ * @Description 请求异步处理的service
  * 通过商品ID将对商铺的处理路由到某一个队列中
+ * @Author lantianbaiyun
+ * @Date 2021-07-07
+ * @Version 1.0
  */
 @Service
 public class RequestAsyncProcessorServiceImpl implements RequestAsyncProcessorService {

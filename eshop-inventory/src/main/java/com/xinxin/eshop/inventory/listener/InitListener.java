@@ -6,7 +6,11 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 /**
- * 初始化线程池对象
+ * @ClassName InitListener
+ * @Description 初始化线程池对象
+ * @Author lantianbaiyun
+ * @Date 2021-07-07
+ * @Version 1.0
  */
 public class InitListener implements ServletContextListener {
 

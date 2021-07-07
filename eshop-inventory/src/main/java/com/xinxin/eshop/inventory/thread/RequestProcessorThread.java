@@ -12,7 +12,11 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Callable;
 
 /**
- * 工作线程
+ * @ClassName RequestProcessorThread
+ * @Description 工作线程
+ * @Author lantianbaiyun
+ * @Date 2021-07-07
+ * @Version 1.0
  */
 public class RequestProcessorThread implements Callable<Boolean> {
     private static final Logger log = LoggerFactory.getLogger(RequestProcessorThread.class);

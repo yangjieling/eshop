@@ -8,8 +8,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 初始化线程池
+ * @ClassName RequestProcessorThreadPool
+ * @Description 初始化线程池
  * 单例模式
+ * @Author lantianbaiyun
+ * @Date 2021-07-07
+ * @Version 1.0
  */
 public class RequestProcessorThreadPool {
 

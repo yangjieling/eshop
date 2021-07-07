@@ -12,7 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+/**
+ * @ClassName ProductInventoryController
+ * @Description TODO
+ * @Author lantianbaiyun
+ * @Date 2021-07-07
+ * @Version 1.0
+ */
 @RestController
 public class ProductInventoryController {
     private static final Logger log = LoggerFactory.getLogger(ProductInventoryController.class);
@@ -46,8 +52,8 @@ public class ProductInventoryController {
             ProductInventoryCacheRefreshRequest request = new ProductInventoryCacheRefreshRequest(productId, productInventoryService,false);
             requestAsyncProcessorService.process(request);
             long startTime = System.currentTimeMillis();
-            long endTime = 0l;
-            long waitTime = 0l;
+            long endTime = 0L;
+            long waitTime = 0L;
 
             // 等待后台线程处理查询请求 查询请求处理完成后会更新缓存 不断从缓存中查询数据
             while (true) {
